@@ -36,6 +36,15 @@ public class Customer {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+    public void decrementBalance(double balance){
+        this.balance-=balance;
+    }
+    public void incrementBalance(double balance){
+        this.balance+=balance;
+    }
+    public void clearCart(){
+        cart=new Cart();
+    }
     void checkout() {
         Map<Products, Integer> items = cart.getItems();
         double total = 0;
@@ -91,5 +100,7 @@ public class Customer {
         System.out.println("Amount\t" + amount);
         System.out.println("\n** Shipment notice **\n" + finalS);
         System.out.println("Total package weight "+ (shippmentWeight/1000)+"kg" );
+        decrementBalance(amount);
+        clearCart();
     }
 }
