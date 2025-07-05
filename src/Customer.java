@@ -51,6 +51,9 @@ public class Customer {
         double shippingTotal = 0;
         double amount = 0;
         double shippmentWeight=0;
+        if (items.isEmpty()){
+            throw new IllegalStateException("No items in cart to order");
+        }
         System.out.println("** Checkout receipt **");
         String finalS = "";
         for (Map.Entry<Products, Integer> item : items.entrySet()) {
@@ -87,7 +90,9 @@ public class Customer {
                 }
                 finalS += line;
             }
+
             System.out.printf("%dX %s\t%f\n", item.getValue(), item.getKey().getName(), productTotal);
+
             if (amount > this.balance) {
                 throw new IllegalStateException("Your orderd items exceeds your balance");
             }
@@ -102,5 +107,6 @@ public class Customer {
         System.out.println("Total package weight "+ (shippmentWeight/1000)+"kg" );
         decrementBalance(amount);
         clearCart();
+        System.out.println("*----------------------------------------------------*\n");
     }
 }

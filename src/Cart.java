@@ -31,10 +31,13 @@ public class Cart {
     public void add(Products product, int quantity) {
         int inStock = product.getQuantity();
         LocalDate timeNow = LocalDate.now();
-        if (product instanceof expirableProducts ){
-            expirableProducts eproduct=(expirableProducts)product;
+        if (product instanceof expirableProducts eproduct){
             if(eproduct.isExpired())
             throw new IllegalStateException(product.getName() + " has expired you can't order it");
+        }
+        if (product instanceof shippableExpirableProducts e){
+            if(e.isExpired())
+                throw new IllegalStateException(product.getName() + " has expired you can't order it");
         }
         if (quantity < 0) {
             System.out.println("Product quantity can\'t be less than 0");

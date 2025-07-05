@@ -33,6 +33,6 @@ public class expirableProducts extends Products implements expirable {
 
     @Override
     public boolean isExpired() {
-        return expire.isAfter(LocalDate.now());
+        return !LocalDate.now().isBefore(expire);
     }
 }

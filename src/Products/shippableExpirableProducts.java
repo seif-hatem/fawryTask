@@ -24,7 +24,7 @@ public class shippableExpirableProducts extends Products implements expirable,sh
 
     @Override
     public boolean isExpired() {
-        return expire.isAfter(LocalDate.now());
+        return !LocalDate.now().isBefore(expire);
     }
 
     @Override
